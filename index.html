@@ -29,8 +29,8 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/index-D28epmKx.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BVrRo5Wb.css">
+  <script type="module" crossorigin src="./assets/index-CmzPJch6.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-TgRVh0jQ.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -237,15 +237,15 @@
             <div class="pill-checkbox-group">
               <div class="pill-check">
                 <input type="checkbox" id="check-private" value="私立" checked>
-                <label for="check-private" class="pill-label">私立</label>
+                <label for="check-private" class="pill-label pill-private">私立</label>
               </div>
               <div class="pill-check">
                 <input type="checkbox" id="check-national" value="国立" checked>
-                <label for="check-national" class="pill-label">国立</label>
+                <label for="check-national" class="pill-label pill-national">国立</label>
               </div>
               <div class="pill-check">
                 <input type="checkbox" id="check-public" value="公立" checked>
-                <label for="check-public" class="pill-label">公立 (都県市立)</label>
+                <label for="check-public" class="pill-label pill-public">公立 (都県市立)</label>
               </div>
             </div>
           </div>
@@ -329,12 +329,21 @@
           </div>
 
           <!-- Rush Hour Filter -->
-          <div class="filter-group">
-            <div class="filter-label">ラッシュ混雑フィルター</div>
-            <select id="filter-rush" class="home-select">
-              <option value="all">すべての路線・通学方向</option>
-              <option value="low_only">🟢 逆ラッシュ・低混雑・近距離のみ</option>
-            </select>
+          <div class="filter-group rush-filter-group">
+            <label class="rush-filter-card" for="filter-rush" id="label-filter-rush">
+              <div class="rush-filter-checkbox-wrap">
+                <input type="checkbox" id="filter-rush" class="rush-checkbox">
+              </div>
+              <div class="rush-filter-info">
+                <div class="rush-filter-title">
+                  <span class="rush-filter-icon">🟢</span>
+                  <span class="rush-filter-text">通勤ラッシュ回避</span>
+                </div>
+                <div class="rush-filter-subtext">
+                  逆ラッシュ・低混雑・近距離の学校のみ
+                </div>
+              </div>
+            </label>
           </div>
 
           <!-- Feature Tags Multi-select -->
