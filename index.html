@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" sizes="192x192" href="./favicon-192x192.png">
   <script src="./config.js"></script>
   <script>
-    if (typeof GTM_ID !== 'undefined' && GTM_ID) {
+    if (typeof GTM_ID !== 'undefined' && GTM_ID && !window.dataLayer) {
       const s = document.createElement('script');
       s.async = true;
       s.src = `https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`;
