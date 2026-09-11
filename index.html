@@ -29,8 +29,8 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/index-BYhOGNvd.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-B2zxNVSX.css">
+  <script type="module" crossorigin src="./assets/index-DucdHgz2.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-POHO-ndi.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -150,10 +150,43 @@
             </div>
           </div>
 
+          <!-- First-Choice School Box -->
+          <div id="primary-school-box" class="primary-school-box empty">
+            <div class="primary-school-header">
+              <div class="primary-school-title">
+                <span>👑 第一志望校</span>
+                <span id="primary-school-name" class="primary-school-badge">未設定</span>
+              </div>
+              <button id="btn-clear-primary-school" class="btn-clear-primary" style="display: none;" type="button" title="第一志望校を解除">
+                解除
+              </button>
+            </div>
+            <div id="primary-school-desc" class="primary-school-desc">
+              学校詳細の「⭐ 第一志望校に設定」を押すと、入試日程が重複して併願できない学校が地図・一覧で半透明グレーアウトされます。
+            </div>
+            <div id="primary-school-conflict-summary" class="primary-school-conflict-summary" style="display: none;"></div>
+          </div>
+
           <!-- Free Keyword Search -->
           <div class="search-wrapper">
             <span class="search-icon">🔍</span>
             <input type="text" id="filter-keyword" class="search-input" placeholder="学校名・特徴・駅名・キーワード検索...">
+          </div>
+
+          <!-- Exam Schedule Filter (2027) -->
+          <div class="filter-group">
+            <div class="filter-label">
+              <span>📝 2027年入試日程で絞り込み</span>
+            </div>
+            <select id="filter-exam-date" class="home-select">
+              <option value="all">すべての入試日程</option>
+              <option value="jan">1月校（埼玉・千葉）</option>
+              <option value="feb1_am">2月1日 午前（都内・神奈川本番）</option>
+              <option value="feb1_pm">2月1日 午後（午後・算数特待等）</option>
+              <option value="feb2">2月2日</option>
+              <option value="feb3">2月3日（国立・都立・公立等）</option>
+              <option value="feb4_plus">2月4日 以降（後期・最終日程）</option>
+            </select>
           </div>
 
           <!-- Upcoming Events Filter (1 week) -->
@@ -371,6 +404,16 @@
           <div class="legend-item">
             <span class="legend-color-dot" style="background: #059669;"></span>
             <span>共学校</span>
+          </div>
+          <div class="legend-item">
+            <span style="font-size: 13px; line-height: 1;">👑</span>
+            <span>第一志望校</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-color-dot" style="background: #94a3b8; opacity: 0.5; position: relative;">
+              <span style="position: absolute; top: -4px; left: 1px; font-size: 10px; color: #475569; font-weight: bold;">✕</span>
+            </span>
+            <span>併願不可 (日程重複)</span>
           </div>
           <div class="legend-item">
             <span class="legend-color-dot" style="background: #d97706;"></span>
