@@ -29,8 +29,8 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/index-C-Lu9l1w.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-i3p1UvJl.css">
+  <script type="module" crossorigin src="./assets/index-D28epmKx.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BVrRo5Wb.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -402,6 +402,25 @@
     <!-- Map Container -->
     <div class="map-container-wrapper">
       <div id="map"></div>
+
+      <!-- PC School Detail Map Dialog Modal -->
+      <div id="school-detail-dialog-overlay" class="school-dialog-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="dialog-header-title">
+        <div class="school-dialog-card" id="school-dialog-card">
+          <div class="school-dialog-header">
+            <div class="school-dialog-header-left">
+              <span class="dialog-header-icon">🏫</span>
+              <span class="dialog-header-title" id="dialog-header-title">学校詳細</span>
+            </div>
+            <button type="button" id="btn-close-school-dialog" class="btn-close-dialog" aria-label="ダイアログを閉じる" title="閉じる (Esc)">
+              <span class="dialog-close-icon">✕</span>
+              <span class="dialog-close-label">閉じる</span>
+            </button>
+          </div>
+          <div class="school-dialog-body" id="school-dialog-body">
+            <!-- School detail content rendered dynamically -->
+          </div>
+        </div>
+      </div>
 
       <!-- Map Legend -->
       <div class="map-legend">
