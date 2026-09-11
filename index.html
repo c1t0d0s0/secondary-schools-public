@@ -21,8 +21,8 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/index-8mJuUcI2.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-sE14ICy9.css">
+  <script type="module" crossorigin src="./assets/index-DscMpYqd.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CNIZmbrb.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -107,20 +107,36 @@
       <div class="sidebar-content">
         <!-- Tab 1: Filters -->
         <div id="tab-filters" class="tab-panel active">
-          <!-- Home Station Presets -->
+          <!-- Home (Origin) Settings -->
           <div class="home-config-box">
             <div class="home-config-title">
               <span>🏠 自宅（出発地）の設定</span>
-              <span id="current-home-name" style="font-weight: normal; color: #b45309;">新宿駅</span>
+              <span id="current-home-name" class="current-home-badge">新宿駅</span>
             </div>
-            <select id="home-preset-select" class="home-select">
-              <!-- Dynamically populated -->
-            </select>
+
+            <!-- 1. 住所を入力 -->
+            <form id="form-home-address" class="home-address-form" onsubmit="return false;">
+              <div class="home-address-row">
+                <input
+                  type="text"
+                  id="input-home-address"
+                  class="home-address-input"
+                  placeholder="住所・市区町村・最寄駅を入力..."
+                  aria-label="自宅の住所を入力"
+                >
+                <button type="submit" id="btn-search-home-address" class="btn-home-search">
+                  設定
+                </button>
+              </div>
+              <div id="home-address-status" class="home-address-status" style="display: none;"></div>
+            </form>
+
+            <!-- 2. 現在地を取得 & 3. 地図クリックで設定 -->
             <div class="home-tools-row">
-              <button id="btn-use-gps" class="btn-home-tool" type="button">
+              <button id="btn-use-gps" class="btn-home-tool" type="button" title="端末のGPS等で現在地を取得して設定">
                 <span>📡 現在地を取得</span>
               </button>
-              <button id="btn-click-map-home" class="btn-home-tool" type="button">
+              <button id="btn-click-map-home" class="btn-home-tool" type="button" title="地図上をクリックした場所を設定">
                 <span>🗺 地図クリックで設定</span>
               </button>
             </div>
