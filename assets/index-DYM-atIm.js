@@ -114,10 +114,13 @@ var e=Object.create,t=Object.defineProperty,n=Object.getOwnPropertyDescriptor,r=
         </div>
       </div>
 
-      <div class="detail-actions">
+      <div class="detail-primary-choice-wrap">
         <button id="btn-toggle-primary-school" class="btn-primary-choice ${i?.id===e.id?`is-selected`:``}" data-school-id="${e.id}">
           ${i?.id===e.id?`👑 第一志望校に設定中 (クリックで解除)`:`⭐ 第一志望校に設定`}
         </button>
+      </div>
+
+      <div class="detail-actions">
         <button id="btn-focus-school" class="btn-primary-action">
           📍 地図で位置を確認
         </button>
