@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ユーザー管理コンソール - 1都3県の中高一貫校マップ</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="../favicon-192x192.png">
+  <script src="../config.js"></script>
+  <script>
+    if (typeof FIREBASE_CONFIG !== 'undefined' && typeof window !== 'undefined') {
+      window.FIREBASE_CONFIG = FIREBASE_CONFIG;
+    }
+  </script>
+  <script type="module" crossorigin src="../assets/admin-7xmjKmxX.js"></script>
+  <link rel="modulepreload" crossorigin href="../assets/firebase-DYlL05O2.js">
+  <link rel="stylesheet" crossorigin href="../assets/firebase-CjOsynBH.css">
+  <link rel="stylesheet" crossorigin href="../assets/admin-D7ogFang.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GESQ9QJZRE');
+  </script>
+</head>
+<body class="admin-body">
+
+  <!-- Admin Header -->
+  <header class="admin-header">
+    <div class="admin-header-brand">
+      <span class="admin-logo-icon">🛡️</span>
+      <div class="admin-brand-texts">
+        <h1 class="admin-brand-title">中高一貫校マップ 管理コンソール</h1>
+        <span class="admin-brand-sub">ユーザーアクセス権限・ホワイトリスト管理</span>
+      </div>
+    </div>
+    <div class="admin-header-nav">
+      <a href="../index.html" class="btn-return-map">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>学校マップに戻る</span>
+      </a>
+      <div id="admin-user-profile" class="admin-user-profile" style="display: none;">
+        <span id="admin-avatar-icon" class="admin-avatar">👤</span>
+        <div class="admin-user-info">
+          <span id="admin-user-email" class="admin-user-email"></span>
+          <span class="badge-admin">管理者</span>
+        </div>
+        <button type="button" id="btn-admin-logout" class="btn-admin-logout" title="ログアウト">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          <span>ログアウト</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="admin-container">
+
+    <!-- Loading State -->
+    <div id="admin-loading-view" class="admin-status-card">
+      <div class="admin-spinner"></div>
+      <p id="admin-loading-text">認証状態と管理者権限を確認しています...</p>
+    </div>
+
+    <!-- Login Required State -->
+    <div id="admin-login-view" class="admin-status-card" style="display: none;">
+      <div class="admin-card-icon">🔐</div>
+      <h2>管理者ログイン</h2>
+      <p>管理コンソールを利用するには、管理者権限（role: admin）を持つGoogleアカウントでログインしてください。</p>
+      <button type="button" id="btn-admin-google-login" class="btn-google-signin" style="margin-top: 16px;">
+        <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+        <span>Googleで管理者ログイン</span>
+      </button>
+      <div id="admin-login-error" class="admin-alert-danger" style="display: none; margin-top: 14px;"></div>
+    </div>
+
+    <!-- Access Denied (Not Admin) State -->
+    <div id="admin-denied-view" class="admin-status-card" style="display: none;">
+      <div class="admin-card-icon">🚫</div>
+      <h2>アクセス権限がありません</h2>
+      <p id="admin-denied-msg">現在ログイン中のアカウントには管理者権限が付与されていません。</p>
+      <div class="admin-help-box">
+        <strong>【初回セットアップ方法】</strong>
+        <p>最初の管理者は Firebase Console の Firestore データベースにて、対象アカウントのホワイトリストドキュメント（<code>/whitelist/{email}</code>）に <code>role: "admin"</code> を追加してください。</p>
+      </div>
+      <div class="admin-btn-group" style="margin-top: 16px;">
+        <button type="button" id="btn-denied-switch" class="btn-primary">別のアカウントでログイン</button>
+        <a href="../index.html" class="btn-secondary">学校マップに戻る</a>
+      </div>
+    </div>
+
+    <!-- Admin Dashboard View -->
+    <div id="admin-dashboard-view" style="display: none;">
+
+      <!-- Top Notification Banner -->
+      <div id="admin-toast" class="admin-toast" style="display: none;"></div>
+
+      <!-- Stats Counters -->
+      <section class="admin-stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">総登録ユーザー</span>
+          <span id="stat-total" class="stat-value">0</span>
+        </div>
+        <div class="stat-card stat-success">
+          <span class="stat-label">有効ユーザー</span>
+          <span id="stat-enabled" class="stat-value">0</span>
+        </div>
+        <div class="stat-card stat-muted">
+          <span class="stat-label">無効化ユーザー</span>
+          <span id="stat-disabled" class="stat-value">0</span>
+        </div>
+        <div class="stat-card stat-admin">
+          <span class="stat-label">管理者アカウント</span>
+          <span id="stat-admins" class="stat-value">0</span>
+        </div>
+      </section>
+
+      <!-- Users Management Card -->
+      <section class="admin-card">
+        <div class="admin-card-header">
+          <div class="admin-card-title-group">
+            <h2 class="admin-card-title">登録ユーザー一覧 (ホワイトリスト)</h2>
+            <p class="admin-card-desc">Googleアカウントのメールアドレスを登録することで、マップの閲覧・復号権限を付与できます。</p>
+          </div>
+          <button type="button" id="btn-open-add-modal" class="btn-add-user">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            <span>新規ユーザーを追加</span>
+          </button>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="admin-toolbar">
+          <div class="admin-search-box">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="admin-search-input" placeholder="メールアドレスやメモで検索...">
+            <button type="button" id="btn-clear-search" class="btn-clear" style="display: none;">✕</button>
+          </div>
+          <div class="admin-filter-tabs">
+            <button type="button" class="tab-btn active" data-filter="all">すべて</button>
+            <button type="button" class="tab-btn" data-filter="enabled">有効のみ</button>
+            <button type="button" class="tab-btn" data-filter="disabled">無効のみ</button>
+            <button type="button" class="tab-btn" data-filter="admin">管理者のみ</button>
+          </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>メールアドレス</th>
+                <th>メモ / 所属</th>
+                <th>権限ロール</th>
+                <th>ステータス</th>
+                <th>更新日時</th>
+                <th class="th-actions">操作</th>
+              </tr>
+            </thead>
+            <tbody id="admin-users-tbody">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+          <div id="admin-empty-state" class="admin-empty-state" style="display: none;">
+            <p>該当するユーザーが見つかりません。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Decryption Key Management Accordion Card -->
+      <section class="admin-card admin-secrets-card">
+        <div class="admin-card-header" id="header-toggle-secret" style="cursor: pointer;">
+          <div>
+            <h2 class="admin-card-title">🔐 データ復号キー (/secrets/app_config) 管理</h2>
+            <p class="admin-card-desc">許可されたユーザーに自動配布される暗号化データの復号パスワード</p>
+          </div>
+          <span id="secret-toggle-icon" class="toggle-icon">▼</span>
+        </div>
+        <div id="secret-content-body" class="secret-body" style="display: none;">
+          <div class="secret-info-box">
+            <label class="form-label">現在の復号パスワード</label>
+            <div class="secret-input-row">
+              <input type="password" id="secret-current-val" readonly value="読み込み中...">
+              <button type="button" id="btn-toggle-secret-visibility" class="btn-icon" title="パスワードを表示/非表示">👁️</button>
+            </div>
+            <p class="form-help">※ このパスワードは Firestore のセキュリティルールにより管理者および許可ユーザーのみ取得できます。</p>
+          </div>
+
+          <form id="form-update-secret" class="secret-update-form">
+            <label class="form-label">パスワードを変更する場合</label>
+            <div class="secret-update-row">
+              <input type="password" id="input-new-secret" placeholder="新しい復号パスワードを入力" autocomplete="off">
+              <button type="submit" id="btn-submit-secret" class="btn-secondary">パスワードを更新</button>
+            </div>
+            <p class="form-help danger">⚠️ 注意: パスワードを変更した場合、暗号化ファイル（schools.enc.json）を同じパスワードで再ビルドしてデプロイする必要があります。</p>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Add / Edit User Modal -->
+  <div id="modal-user" class="modal-overlay" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-user-title" class="modal-title">ユーザーを追加</h3>
+        <button type="button" id="btn-close-modal" class="modal-close-btn">&times;</button>
+      </div>
+      <form id="form-user" class="modal-form">
+        <div class="form-group">
+          <label for="input-user-email" class="form-label">Googleアカウントのメールアドレス <span class="required">*</span></label>
+          <input type="email" id="input-user-email" class="form-input" placeholder="example@gmail.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="input-user-note" class="form-label">メモ / 氏名 / 所属 (任意)</label>
+          <input type="text" id="input-user-note" class="form-input" placeholder="例: ○○様 (保護者), 運営スタッフ など">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">権限ロール</label>
+          <div class="radio-options">
+            <label class="radio-label">
+              <input type="radio" name="user-role" value="user" checked>
+              <span>一般ユーザー (マップ閲覧のみ)</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="user-role" value="admin">
+              <span>管理者 (本コンソールでのユーザー管理が可能)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="check-user-enabled" checked>
+            <span>アカウントを有効にする (チェックを外すと即時アクセス拒否)</span>
+          </label>
+        </div>
+
+        <div id="modal-error-msg" class="admin-alert-danger" style="display: none;"></div>
+
+        <div class="modal-footer">
+          <button type="button" id="btn-modal-cancel" class="btn-secondary">キャンセル</button>
+          <button type="submit" id="btn-modal-save" class="btn-primary">保存する</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
