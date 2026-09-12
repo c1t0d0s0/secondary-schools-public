@@ -12,33 +12,35 @@ import{c as e,d as t,f as n,i as r,l as i,n as a,o,r as ee,s as te,t as ne,u as 
         </div>
       `:``}
     </div>
-  `,x.style.display=`block`}function ue(e){let t=e.length,n=e.filter(e=>e.enabled).length,r=t-n,i=e.filter(e=>e.role===`admin`&&e.enabled).length;g&&(g.textContent=t),_&&(_.textContent=n),v&&(v.textContent=r),y&&(y.textContent=i)}function Y(){if(!b)return;let e=c.searchQuery.toLowerCase().trim(),t=c.activeFilter,n=c.users.filter(n=>!e||n.email.toLowerCase().includes(e)||n.note&&n.note.toLowerCase().includes(e)?t===`enabled`?n.enabled:t===`disabled`?!n.enabled:t!==`admin`||n.role===`admin`:!1);if(b.innerHTML=``,n.length===0){x.innerHTML=`<p>該当するユーザーが見つかりません。</p>`,x.style.display=`block`;return}x.style.display=`none`,n.forEach(e=>{let t=document.createElement(`tr`),n=c.currentUser&&c.currentUser.email.toLowerCase()===e.email.toLowerCase(),r=e.updatedAt?X(e.updatedAt):e.createdAt?X(e.createdAt):`-`;t.innerHTML=`
-      <td>
+  `,x.style.display=`block`}function ue(e){let t=e.length,n=e.filter(e=>e.enabled).length,r=t-n,i=e.filter(e=>e.role===`admin`&&e.enabled).length;g&&(g.textContent=t),_&&(_.textContent=n),v&&(v.textContent=r),y&&(y.textContent=i)}function Y(){if(!b)return;let e=c.searchQuery.toLowerCase().trim(),t=c.activeFilter,n=c.users.filter(n=>!e||n.email.toLowerCase().includes(e)||n.note&&n.note.toLowerCase().includes(e)?t===`enabled`?n.enabled:t===`disabled`?!n.enabled:t!==`admin`||n.role===`admin`:!1);if(b.innerHTML=``,n.length===0){x.innerHTML=`<p>該当するユーザーが見つかりません。</p>`,x.style.display=`block`;return}x.style.display=`none`,n.forEach(e=>{let t=document.createElement(`tr`);t.className=`admin-user-row`;let n=c.currentUser&&c.currentUser.email.toLowerCase()===e.email.toLowerCase(),r=e.updatedAt?X(e.updatedAt):e.createdAt?X(e.createdAt):`-`;t.innerHTML=`
+      <td class="td-email" data-label="メールアドレス">
         <div class="user-email-cell">
-          <span>${Z(e.email)}</span>
-          ${n?`<span style="font-size: 0.72rem; color: #7c3aed; font-weight: bold;">(あなた)</span>`:``}
+          <span class="user-email-text">${Z(e.email)}</span>
+          ${n?`<span class="badge-you">(あなた)</span>`:``}
         </div>
       </td>
-      <td>
+      <td class="td-note" data-label="メモ / 所属">
         <div class="user-note-cell" title="${Z(e.note||``)}">${Z(e.note||`-`)}</div>
       </td>
-      <td>
+      <td class="td-role" data-label="権限ロール">
         <span class="badge-role ${e.role===`admin`?`admin`:`user`}">
           ${e.role===`admin`?`管理者`:`一般`}
         </span>
       </td>
-      <td>
+      <td class="td-status" data-label="ステータス">
         <span class="badge-status ${e.enabled?`enabled`:`disabled`}">
           ${e.enabled?`有効`:`無効`}
         </span>
       </td>
-      <td>
+      <td class="td-date" data-label="更新日時">
         <span class="user-date-cell">${r}</span>
       </td>
-      <td class="td-actions">
-        ${e.enabled?`<button type="button" class="action-btn btn-toggle-disable" data-email="${Z(e.email)}" ${n?`disabled title="自身のアカウントは無効化できません"`:``}>無効化</button>`:`<button type="button" class="action-btn btn-toggle-enable" data-email="${Z(e.email)}">有効化</button>`}
-        <button type="button" class="action-btn btn-edit-user" data-email="${Z(e.email)}">編集</button>
-        <button type="button" class="action-btn btn-delete-user" data-email="${Z(e.email)}" ${n?`disabled title="自身のアカウントは削除できません"`:``}>削除</button>
+      <td class="td-actions" data-label="操作">
+        <div class="actions-btn-group">
+          ${e.enabled?`<button type="button" class="action-btn btn-toggle-disable" data-email="${Z(e.email)}" ${n?`disabled title="自身のアカウントは無効化できません"`:``}>無効化</button>`:`<button type="button" class="action-btn btn-toggle-enable" data-email="${Z(e.email)}">有効化</button>`}
+          <button type="button" class="action-btn btn-edit-user" data-email="${Z(e.email)}">編集</button>
+          <button type="button" class="action-btn btn-delete-user" data-email="${Z(e.email)}" ${n?`disabled title="自身のアカウントは削除できません"`:``}>削除</button>
+        </div>
       </td>
     `,b.appendChild(t)})}function X(e){try{let t=new Date(e);return isNaN(t.getTime())?e:`${t.getFullYear()}/${String(t.getMonth()+1).padStart(2,`0`)}/${String(t.getDate()).padStart(2,`0`)} ${String(t.getHours()).padStart(2,`0`)}:${String(t.getMinutes()).padStart(2,`0`)}`}catch{return e}}function Z(e){return String(e||``).replace(/&/g,`&amp;`).replace(/</g,`&lt;`).replace(/>/g,`&gt;`).replace(/"/g,`&quot;`).replace(/'/g,`&#039;`)}function Q(e=null){if(F.style.display=`none`,F.textContent=``,e){c.editingUserEmail=e.email,O.textContent=`ユーザーを編集: ${e.email}`,M.value=e.email,M.readOnly=!0,M.style.background=`#f8fafc`,N.value=e.note||``,P.checked=e.enabled;let t=j.querySelector(`input[name="user-role"][value="${e.role||`user`}"]`);t&&(t.checked=!0)}else{c.editingUserEmail=null,O.textContent=`新規ユーザーを追加`,M.value=``,M.readOnly=!1,M.style.background=`#ffffff`,N.value=``,P.checked=!0;let e=j.querySelector(`input[name="user-role"][value="user"]`);e&&(e.checked=!0)}D.style.display=`flex`,M.focus()}function $(){D.style.display=`none`,c.editingUserEmail=null}f&&f.addEventListener(`click`,async()=>{f.disabled=!0,h.style.display=`none`;try{await e()}catch(e){console.error(`Google login error:`,e),f.disabled=!1,h.textContent=`ログインに失敗しました: ${e.message||e.code}`,h.style.display=`block`}}),p&&p.addEventListener(`click`,async()=>{await i()}),m&&m.addEventListener(`click`,async()=>{try{await e()}catch(e){console.error(`Switch account error:`,e)}}),S&&S.addEventListener(`input`,e=>{c.searchQuery=e.target.value,C&&(C.style.display=c.searchQuery?`block`:`none`),Y()}),C&&C.addEventListener(`click`,()=>{S.value=``,c.searchQuery=``,C.style.display=`none`,Y()}),w.forEach(e=>{e.addEventListener(`click`,()=>{w.forEach(e=>e.classList.remove(`active`)),e.classList.add(`active`),c.activeFilter=e.getAttribute(`data-filter`)||`all`,Y()})}),T&&T.addEventListener(`click`,()=>Q()),k&&k.addEventListener(`click`,$),A&&A.addEventListener(`click`,$),D.addEventListener(`click`,e=>{e.target===D&&$()}),j.addEventListener(`submit`,async e=>{e.preventDefault(),F.style.display=`none`;let t=M.value.trim().toLowerCase(),n=N.value.trim(),r=j.querySelector(`input[name="user-role"]:checked`),i=r?r.value:`user`,a=P.checked;if(!t||!t.includes(`@`)){F.textContent=`有効なメールアドレスを入力してください。`,F.style.display=`block`;return}I.disabled=!0,I.textContent=`保存中...`;try{await ne({email:t,role:i,enabled:a,note:n}),K(c.editingUserEmail?`ユーザー「${t}」を更新しました`:`ユーザー「${t}」を追加しました`,`success`),$(),await J()}catch(e){console.error(`Failed to save user:`,e),F.textContent=`保存に失敗しました: ${e.message}`,F.style.display=`block`}finally{I.disabled=!1,I.textContent=`保存する`}}),b.addEventListener(`click`,async e=>{let t=e.target;if(!t||!t.classList.contains(`action-btn`))return;let r=t.getAttribute(`data-email`);if(r){if(t.classList.contains(`btn-toggle-disable`)){try{t.disabled=!0,await n(r,{enabled:!1}),K(`ユーザー「${r}」を無効化しました`,`success`),await J()}catch(e){K(`無効化失敗: ${e.message}`,`error`),t.disabled=!1}return}if(t.classList.contains(`btn-toggle-enable`)){try{t.disabled=!0,await n(r,{enabled:!0}),K(`ユーザー「${r}」を有効化しました`,`success`),await J()}catch(e){K(`有効化失敗: ${e.message}`,`error`),t.disabled=!1}return}if(t.classList.contains(`btn-edit-user`)){let e=c.users.find(e=>e.email.toLowerCase()===r.toLowerCase());e&&Q(e);return}if(t.classList.contains(`btn-delete-user`)){if(!window.confirm(`ユーザー「${r}」をホワイトリストから削除しますか？\n削除されたユーザーは即座にアプリにアクセスできなくなります。`))return;try{t.disabled=!0,await ee(r),K(`ユーザー「${r}」を削除しました`,`success`),await J()}catch(e){K(`削除失敗: ${e.message}`,`error`),t.disabled=!1}}}}),L&&L.addEventListener(`click`,()=>{let e=R.style.display===`none`;R.style.display=e?`block`:`none`,se.textContent=e?`▲`:`▼`}),B&&B.addEventListener(`click`,()=>{W=!W,z.type=W?`text`:`password`,B.textContent=W?`🔒`:`👁️`}),V&&V.addEventListener(`submit`,async e=>{e.preventDefault();let n=H.value.trim();if(!n){K(`新しいパスワードを入力してください`,`error`);return}if(window.confirm(`【警告】復号パスワードを変更すると、新しいパスワードで暗号化データを再ビルド・再デプロイするまで既存のユーザーはデータを復号できなくなります。
 
