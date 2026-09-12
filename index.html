@@ -32,9 +32,9 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/main-6WoXAwFH.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/firebase-DYlL05O2.js">
-  <link rel="stylesheet" crossorigin href="./assets/firebase-CjOsynBH.css">
+  <script type="module" crossorigin src="./assets/main-CaeR7jE3.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/firebase-C8HqNiVo.js">
+  <link rel="stylesheet" crossorigin href="./assets/firebase-pvhgtwcy.css">
   <link rel="stylesheet" crossorigin href="./assets/main-vh-t_kPv.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
@@ -71,6 +71,8 @@
           </svg>
           <span id="google-btn-text">Googleでログイン</span>
         </button>
+
+        <div id="firebase-login-error" class="auth-error-msg" style="display: none; margin-top: 10px;"></div>
 
         <!-- Whitelist denied / error alert container -->
         <div id="auth-whitelist-alert" class="auth-whitelist-alert" style="display: none;">
@@ -186,8 +188,11 @@
           <!-- Home (Origin) Settings -->
           <div class="home-config-box">
             <div class="home-config-title">
-              <span>🏠 自宅（出発地）の設定</span>
-              <span id="current-home-name" class="current-home-badge">新宿駅</span>
+              <span class="home-config-label">🏠 自宅（出発地）の設定</span>
+              <div class="home-badges-wrap">
+                <span id="current-home-name" class="current-home-badge">新宿駅</span>
+                <span id="home-saved-badge" class="home-saved-badge" style="display: none;" title="ブラウザに保存済み">保存済</span>
+              </div>
             </div>
 
             <!-- 1. 住所を入力 -->
@@ -214,6 +219,14 @@
               </button>
               <button id="btn-click-map-home" class="btn-home-tool" type="button" title="地図上をクリックした場所を設定">
                 <span>🗺 地図クリックで設定</span>
+              </button>
+            </div>
+
+            <!-- 自宅位置の保存・初期化アクション -->
+            <div id="home-saved-actions" class="home-saved-actions" style="display: none;">
+              <span class="home-saved-hint">💾 自宅位置をブラウザに保存中</span>
+              <button type="button" id="btn-reset-home" class="btn-reset-home" title="初期位置（新宿駅）に戻す">
+                初期位置（新宿駅）に戻す
               </button>
             </div>
           </div>
