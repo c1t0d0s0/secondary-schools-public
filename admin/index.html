@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ユーザー管理コンソール - 1都3県の中高一貫校マップ</title>
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -13,10 +13,9 @@
       window.FIREBASE_CONFIG = FIREBASE_CONFIG;
     }
   </script>
-  <script type="module" crossorigin src="../assets/admin-D0IAtut0.js"></script>
-  <link rel="modulepreload" crossorigin href="../assets/firebase-C8HqNiVo.js">
-  <link rel="stylesheet" crossorigin href="../assets/firebase-pvhgtwcy.css">
-  <link rel="stylesheet" crossorigin href="../assets/admin-Dw3G8xq9.css">
+  <script type="module" crossorigin src="../assets/admin-Du-FsGmS.js"></script>
+  <link rel="modulepreload" crossorigin href="../assets/firebase-0fHsMvKS.js">
+  <link rel="stylesheet" crossorigin href="../assets/admin-BfPUYVS8.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -45,10 +44,12 @@
         <span>学校マップに戻る</span>
       </a>
       <div id="admin-user-profile" class="admin-user-profile" style="display: none;">
-        <span id="admin-avatar-icon" class="admin-avatar">👤</span>
-        <div class="admin-user-info">
-          <span id="admin-user-email" class="admin-user-email"></span>
-          <span class="badge-admin">管理者</span>
+        <div class="admin-user-meta">
+          <span id="admin-avatar-icon" class="admin-avatar">👤</span>
+          <div class="admin-user-info">
+            <span id="admin-user-email" class="admin-user-email"></span>
+            <span class="badge-admin">管理者</span>
+          </div>
         </div>
         <button type="button" id="btn-admin-logout" class="btn-admin-logout" title="ログアウト">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
@@ -133,8 +134,11 @@
       <section class="admin-card">
         <div class="admin-card-header">
           <div class="admin-card-title-group">
-            <h2 class="admin-card-title">登録ユーザー一覧 (ホワイトリスト)</h2>
-            <p class="admin-card-desc">Googleアカウントのメールアドレスを登録することで、マップの閲覧・復号権限を付与できます。</p>
+            <h2 class="admin-card-title">
+              <span class="admin-card-title-main">登録ユーザー一覧</span>
+              <span class="admin-card-title-badge">ホワイトリスト</span>
+            </h2>
+            <p class="admin-card-desc">Googleアカウントを登録してマップの閲覧権限を付与します。</p>
           </div>
           <button type="button" id="btn-open-add-modal" class="btn-add-user">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
