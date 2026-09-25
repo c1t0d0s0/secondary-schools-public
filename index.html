@@ -32,9 +32,9 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/main-DY1A3QGP.js"></script>
+  <script type="module" crossorigin src="./assets/main-uWxNd5kp.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/firebase-Bpv078Uo.js">
-  <link rel="stylesheet" crossorigin href="./assets/main-G5Olq-AU.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-Cdt2vzVE.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -242,9 +242,44 @@
               </button>
             </div>
             <div id="primary-school-desc" class="primary-school-desc">
-              学校詳細の「⭐ 第一志望校に設定」を押すと、入試日程が重複して併願できない学校が地図・一覧で半透明グレーアウトされます。この情報はサーバーに送られず、ブラウザ内部に保存されます。
+              学校詳細の「⭐ 第一志望校に設定」を押すと、入試日程の重複や性別区分が異なる出願不可校が地図・一覧で半透明グレーアウトされます。この情報はサーバーに送られず、ブラウザ内部に保存されます。
             </div>
+            <div id="primary-school-slots-wrap" class="primary-school-slots-wrap" style="display: none;"></div>
             <div id="primary-school-conflict-summary" class="primary-school-conflict-summary" style="display: none;"></div>
+          </div>
+
+          <!-- 2/1 Afternoon Transit Simulator (Hub Diagnosis) -->
+          <div id="feb1-simulator-box" class="feb1-simulator-box inactive">
+            <div class="feb1-sim-box-header">
+              <div class="feb1-sim-box-title">
+                <span class="sim-icon">🏃</span>
+                <span>2/1午後入試ハブ判定</span>
+                <span id="feb1-status-pill" class="sim-status-pill off">OFF</span>
+              </div>
+              <button id="btn-clear-feb1-sim" class="btn-clear-sim" style="display: none;" type="button" title="シミュレーションを解除">
+                解除
+              </button>
+            </div>
+            <div class="feb1-sim-box-desc" id="feb1-sim-box-desc">
+              午前校（12:30終了想定）から午後校（15:00集合想定）へ無理なく移動できる午後校を自動判定します。
+            </div>
+            <div class="feb1-morning-select-wrap">
+              <label for="select-feb1-morning-school" class="feb1-select-label">🚩 2/1 午前校を選択:</label>
+              <select id="select-feb1-morning-school" class="home-select">
+                <option value="">午前校を選択して判定開始...</option>
+              </select>
+            </div>
+            <div id="feb1-control-options" class="feb1-control-options" style="display: none;">
+              <div class="feb1-filter-row">
+                <span class="feb1-sublabel">移動所要時間の上限:</span>
+                <div class="feb1-limit-pills" id="feb1-limit-pills">
+                  <button type="button" class="preset-chip active" data-max="60">60分以内</button>
+                  <button type="button" class="preset-chip" data-max="75">75分以内</button>
+                  <button type="button" class="preset-chip" data-max="999">すべての午後校</button>
+                </div>
+              </div>
+              <div id="feb1-sim-result-summary" class="feb1-sim-result-summary"></div>
+            </div>
           </div>
 
           <!-- Free Keyword Search -->
@@ -488,6 +523,21 @@
     <div class="map-container-wrapper">
       <div id="map"></div>
 
+      <!-- Feb 1 Transit Simulator Active Banner on Map -->
+      <div id="feb1-active-banner" class="feb1-active-banner" style="display: none;">
+        <div class="banner-left">
+          <span class="banner-icon">🏃</span>
+          <div class="banner-text">
+            <strong>2/1午後入試ハブ判定中:</strong>
+            <span id="feb1-banner-origin-name">起点「開成中学校」</span>
+            <span id="feb1-banner-limit-label" class="banner-limit-label">(60分以内)</span>
+          </div>
+        </div>
+        <button type="button" id="btn-banner-close-sim" class="btn-banner-close" title="シミュレーションを終了して通常表示に戻す">
+          <span>✕ 通常表示に戻す</span>
+        </button>
+      </div>
+
       <!-- PC School Detail Map Dialog Modal -->
       <div id="school-detail-dialog-overlay" class="school-dialog-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="dialog-header-title">
         <div class="school-dialog-card" id="school-dialog-card">
@@ -511,6 +561,14 @@
       <div class="map-legend">
         <div class="legend-title">凡例</div>
         <div class="legend-items">
+          <div class="legend-item" id="legend-feb1-origin" style="display: none;">
+            <span style="font-size: 13px; line-height: 1;">🚩</span>
+            <span>2/1 午前起点校</span>
+          </div>
+          <div class="legend-item" id="legend-feb1-pm" style="display: none;">
+            <span class="legend-color-dot" style="background: #059669;"></span>
+            <span>2/1 午後校 (所要時間表示)</span>
+          </div>
           <div class="legend-item">
             <span class="legend-color-dot" style="background: #1d4ed8;"></span>
             <span>男子校</span>
@@ -531,7 +589,7 @@
             <span class="legend-color-dot" style="background: #94a3b8; opacity: 0.5; position: relative;">
               <span style="position: absolute; top: -4px; left: 1px; font-size: 10px; color: #475569; font-weight: bold;">✕</span>
             </span>
-            <span>併願不可 (日程重複)</span>
+            <span>併願・出願不可 (日程重複・性別対象外)</span>
           </div>
           <div class="legend-item">
             <span class="legend-color-dot" style="background: #d97706;"></span>
