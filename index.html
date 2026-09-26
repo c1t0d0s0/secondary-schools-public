@@ -32,9 +32,9 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/main-C7BmjMaw.js"></script>
+  <script type="module" crossorigin src="./assets/main-Cro7LW5r.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/firebase-Bpv078Uo.js">
-  <link rel="stylesheet" crossorigin href="./assets/main-BEGH5qFt.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-DYM1bD_6.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -149,6 +149,11 @@
       <button id="btn-toggle-home-mode" class="btn-header" title="地図上をクリックして自宅位置を設定" aria-label="自宅位置を設定">
         <span>📍</span>
         <span class="header-btn-text">自宅位置を設定</span>
+      </button>
+
+      <button id="btn-open-backup-modal" class="btn-header btn-header-backup" title="設定・併願プランのJSON保存と読み込み" aria-label="データ保存・読込">
+        <span>💾</span>
+        <span class="header-btn-text">データ保存・読込</span>
       </button>
     </div>
   </header>
@@ -482,6 +487,13 @@
             </button>
           </div>
 
+          <!-- Data Backup & Restore Action Bar -->
+          <div class="filter-backup-bar">
+            <button type="button" id="btn-open-backup-filters" class="btn-open-backup-trigger" title="設定や併願プランをJSON形式で保存・復元">
+              <span>💾 設定・併願プランのJSON保存・読込</span>
+            </button>
+          </div>
+
           <!-- User Required Model Disclaimer -->
           <div class="model-disclaimer" style="margin-top: 14px;">
             ※ 公共交通機関による移動時間および混雑度の判定は「東京都市交通推計モデル」に基づく概算・推計値であり、ダイヤ・運行状況・乗換タイミング等によって実際とは異なる場合があります。目安としてご活用ください。<br>
@@ -681,6 +693,92 @@
       <div class="coapp-modal-footer">
         <button type="button" id="btn-cancel-note" class="btn-coapp-cancel">キャンセル</button>
         <button type="button" id="btn-save-note" class="btn-coapp-save">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Backup & Restore Modal (JSON) -->
+  <div id="data-backup-modal" class="coapp-modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="backup-modal-title">
+    <div class="coapp-modal-dialog data-backup-dialog">
+      <div class="coapp-modal-header">
+        <div class="coapp-modal-title-group">
+          <span class="coapp-modal-icon">💾</span>
+          <h3 id="backup-modal-title" class="coapp-modal-title">設定・併願データの保存と読込 (JSON)</h3>
+        </div>
+        <button type="button" id="btn-close-backup-modal" class="btn-close-coapp-modal" aria-label="閉じる">✕</button>
+      </div>
+
+      <!-- Mode Switcher Tabs -->
+      <div class="backup-tab-switcher">
+        <button type="button" class="btn-backup-tab active" data-backup-tab="export">
+          <span>💾 JSON保存（エクスポート）</span>
+        </button>
+        <button type="button" class="btn-backup-tab" data-backup-tab="import">
+          <span>📥 JSON読込（インポート）</span>
+        </button>
+      </div>
+
+      <!-- Panel 1: Export View -->
+      <div id="backup-panel-export" class="backup-panel active">
+        <p class="backup-desc">
+          設定した<strong>自宅位置・第一志望校・フィルター条件・併願プラン（カレンダー/合否メモ）</strong>を1つのJSONファイルとして保存・書き出します。端末間のデータ移行やバックアップにご活用ください。
+        </p>
+
+        <div class="backup-summary-card" id="backup-export-summary">
+          <!-- Populated dynamically: 🏠自宅, 👑第一志望, 🔍条件, 📅併願校数 -->
+        </div>
+
+        <div class="backup-actions-row">
+          <button type="button" id="btn-download-backup-json" class="btn-backup-primary">
+            <span>💾 JSONファイルをダウンロード</span>
+          </button>
+          <button type="button" id="btn-copy-backup-json" class="btn-backup-secondary">
+            <span>📋 クリップボードにコピー</span>
+          </button>
+        </div>
+        <div id="backup-export-feedback" class="backup-feedback" style="display: none;"></div>
+
+        <!-- Collapsible JSON Preview -->
+        <details class="backup-preview-details">
+          <summary class="backup-preview-summary">JSONデータプレビューを表示</summary>
+          <div class="backup-preview-wrap">
+            <textarea id="textarea-backup-preview" class="backup-textarea" readonly rows="7"></textarea>
+          </div>
+        </details>
+      </div>
+
+      <!-- Panel 2: Import View -->
+      <div id="backup-panel-import" class="backup-panel" style="display: none;">
+        <p class="backup-desc">
+          以前保存したJSONファイルを選択、またはJSONテキストを直接貼り付けて現在の設定と併願プランを復元します。
+        </p>
+
+        <!-- Dropzone / File Picker -->
+        <div class="backup-dropzone" id="backup-dropzone">
+          <div class="dropzone-icon">📁</div>
+          <div class="dropzone-text">
+            <strong>ここにJSONファイルをドラッグ＆ドロップ</strong>
+            <span>またはクリックしてファイルを選択</span>
+          </div>
+          <input type="file" id="input-backup-file" accept=".json,application/json" class="backup-file-input">
+        </div>
+
+        <div class="backup-divider-text">
+          <span>または JSONコードを直接貼り付け</span>
+        </div>
+
+        <textarea id="textarea-import-json" class="backup-textarea" rows="4" placeholder='{"version": "1.0", "home": { ... }, "filters": { ... }, "coappPlans": { ... }}'></textarea>
+
+        <!-- Preview of parsed file before applying -->
+        <div id="backup-import-preview-card" class="backup-summary-card" style="display: none;"></div>
+
+        <div class="backup-actions-row" style="margin-top: 14px;">
+          <button type="button" id="btn-apply-import-json" class="btn-backup-primary btn-import-apply">
+            <span>🔄 設定と併願プランを復元する</span>
+          </button>
+        </div>
+
+        <div id="backup-import-feedback" class="backup-feedback" style="display: none;"></div>
       </div>
     </div>
   </div>
