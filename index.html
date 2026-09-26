@@ -32,9 +32,9 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/main-BuqpXVJz.js"></script>
+  <script type="module" crossorigin src="./assets/main-CM3sW9hZ.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/firebase-Bpv078Uo.js">
-  <link rel="stylesheet" crossorigin href="./assets/main-BjjWdPRW.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-Bi29yefJ.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -570,17 +570,20 @@
 
       <!-- Feb 1 Transit Simulator Active Banner on Map -->
       <div id="feb1-active-banner" class="feb1-active-banner" style="display: none;">
-        <div class="banner-left">
-          <span class="banner-icon">🏃</span>
-          <div class="banner-text">
-            <strong>2/1午後入試ハブ判定中:</strong>
-            <span id="feb1-banner-origin-name">起点「開成中学校」</span>
-            <span id="feb1-banner-limit-label" class="banner-limit-label">(60分以内)</span>
+        <div class="banner-header-line banner-left">
+          <div class="banner-title-wrap banner-text">
+            <span class="banner-icon">🏃</span>
+            <strong class="banner-title-text">2/1午後入試ハブ判定中</strong>
           </div>
+          <button type="button" id="btn-banner-close-sim" class="btn-banner-close" title="シミュレーションを終了して通常表示に戻す">
+            <span class="btn-banner-close-full">✕ 通常表示に戻す</span>
+            <span class="btn-banner-close-mobile">✕ 解除</span>
+          </button>
         </div>
-        <button type="button" id="btn-banner-close-sim" class="btn-banner-close" title="シミュレーションを終了して通常表示に戻す">
-          <span>✕ 通常表示に戻す</span>
-        </button>
+        <div class="banner-sub-row">
+          <span id="feb1-banner-origin-name" class="banner-origin-badge">起点「開成中学校」</span>
+          <span id="feb1-banner-limit-label" class="banner-limit-label">(60分以内)</span>
+        </div>
       </div>
 
       <!-- PC School Detail Map Dialog Modal -->
