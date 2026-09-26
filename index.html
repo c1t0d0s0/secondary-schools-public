@@ -32,9 +32,9 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/main-uWxNd5kp.js"></script>
+  <script type="module" crossorigin src="./assets/main-C7BmjMaw.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/firebase-Bpv078Uo.js">
-  <link rel="stylesheet" crossorigin href="./assets/main-Cdt2vzVE.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-BEGH5qFt.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -175,6 +175,9 @@
         </button>
         <button class="tab-btn" data-tab="tab-list">
           <span>📋</span> 学校一覧 <span id="school-count-badge" class="tab-badge">103</span>
+        </button>
+        <button class="tab-btn" data-tab="tab-plan">
+          <span>📅</span> 併願プラン
         </button>
         <button class="tab-btn" data-tab="tab-detail">
           <span>ℹ️</span> 学校詳細
@@ -508,6 +511,18 @@
           </div>
         </div>
 
+        <!-- Tab: Co-application Planner (Plan A & B Calendar) -->
+        <div id="tab-plan" class="tab-panel">
+          <div id="coapp-plan-content">
+            <!-- Rendered dynamically by concurrent_plan.js / app.js -->
+          </div>
+          <div class="list-bottom-actions">
+            <button type="button" id="btn-plan-bottom-return" class="btn-list-bottom-return">
+              <span>🗺️ 地図に戻る</span>
+            </button>
+          </div>
+        </div>
+
         <!-- Tab 3: School Detail -->
         <div id="tab-detail" class="tab-panel">
           <div id="school-detail-content">
@@ -614,11 +629,64 @@
       <span style="font-size: 18px;">📋</span>
       <span>一覧 (<span id="mobile-badge-count">71</span>)</span>
     </button>
+    <button class="btn-mobile-nav" data-target="plan">
+      <span style="font-size: 18px;">📅</span>
+      <span>併願</span>
+    </button>
     <button class="btn-mobile-nav" data-target="detail">
       <span style="font-size: 18px;">ℹ️</span>
       <span>詳細</span>
     </button>
   </nav>
+
+  <!-- Smart School Picker Modal for Calendar Slot -->
+  <div id="coapp-school-picker-modal" class="coapp-modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="picker-modal-title">
+    <div class="coapp-modal-dialog">
+      <div class="coapp-modal-header">
+        <div class="coapp-modal-title-group">
+          <span class="coapp-modal-icon">🏫</span>
+          <h3 id="picker-modal-title" class="coapp-modal-title">学校を選択して登録</h3>
+        </div>
+        <button type="button" id="btn-close-picker-modal" class="btn-close-coapp-modal" aria-label="閉じる">✕</button>
+      </div>
+      <div class="coapp-modal-filter-row">
+        <input type="text" id="input-picker-search" class="coapp-picker-search" placeholder="学校名・最寄駅で検索..." />
+        <select id="select-picker-sort" class="coapp-picker-select">
+          <option value="score_desc">偏差値が高い順</option>
+          <option value="score_asc">偏差値が低い順</option>
+          <option value="commute_asc">通学時間が短い順</option>
+          <option value="name_asc">学校名順 (50音)</option>
+        </select>
+      </div>
+      <div class="coapp-picker-subtitle" id="coapp-picker-subtitle">
+        <!-- e.g. 2/2 午前に入試がある学校 (34校) -->
+      </div>
+      <div id="coapp-picker-list" class="coapp-picker-list">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Note Edit Modal -->
+  <div id="coapp-note-modal" class="coapp-modal-overlay" style="display: none;" role="dialog" aria-modal="true">
+    <div class="coapp-modal-dialog coapp-modal-sm">
+      <div class="coapp-modal-header">
+        <h3 class="coapp-modal-title">📝 スロットメモの編集</h3>
+        <button type="button" id="btn-close-note-modal" class="btn-close-coapp-modal" aria-label="閉じる">✕</button>
+      </div>
+      <div class="coapp-modal-body">
+        <p id="coapp-note-school-title" class="coapp-note-school-title"></p>
+        <textarea id="coapp-note-textarea" class="coapp-note-textarea" rows="3" placeholder="例: 発表 2/1 22:00、ダブル出願締切 2/2 8:00、手続金締切 2/3"></textarea>
+      </div>
+      <div class="coapp-modal-footer">
+        <button type="button" id="btn-cancel-note" class="btn-coapp-cancel">キャンセル</button>
+        <button type="button" id="btn-save-note" class="btn-coapp-save">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Print Sheet Container -->
+  <div id="coapp-print-container" class="coapp-print-container" style="display: none;"></div>
 
 </body>
 </html>
