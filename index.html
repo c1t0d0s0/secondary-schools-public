@@ -32,9 +32,9 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/main-Cro7LW5r.js"></script>
+  <script type="module" crossorigin src="./assets/main-DzvNpZu-.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/firebase-Bpv078Uo.js">
-  <link rel="stylesheet" crossorigin href="./assets/main-DYM1bD_6.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-BaGaB2Io.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -585,8 +585,11 @@
       </div>
 
       <!-- Map Legend -->
-      <div class="map-legend">
-        <div class="legend-title">凡例</div>
+      <div class="map-legend" id="map-legend">
+        <div class="legend-header">
+          <span class="legend-title">凡例</span>
+          <button type="button" id="btn-close-legend" class="btn-close-legend" aria-label="凡例を閉じる" title="凡例を閉じる">✕</button>
+        </div>
         <div class="legend-items">
           <div class="legend-item" id="legend-feb1-origin" style="display: none;">
             <span style="font-size: 13px; line-height: 1;">🚩</span>
@@ -624,6 +627,12 @@
           </div>
         </div>
       </div>
+
+      <!-- Trigger button to toggle legend on smartphone -->
+      <button type="button" id="btn-open-legend" class="btn-open-legend" aria-label="地図の凡例を表示" title="凡例を表示">
+        <span class="btn-open-legend-icon">🎨</span>
+        <span>凡例</span>
+      </button>
     </div>
   </main>
 
