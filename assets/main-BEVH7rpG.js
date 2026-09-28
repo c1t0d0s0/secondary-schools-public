@@ -206,6 +206,11 @@ import{a as e,c as t,d as n,l as r,n as i,s as a,u as o}from"./firebase-Bpv078Uo
            target="_blank" rel="noopener noreferrer" class="btn-secondary-action">
           🗺 Googleマップで経路確認
         </a>
+        ${e.url?`
+          <a href="${e.url}" target="_blank" rel="noopener noreferrer" class="btn-website-action">
+            🌐 学校公式HP ↗
+          </a>
+        `:``}
       </div>
 
       ${(()=>{if(!o||!o.active||!o.morningSchool||!o.transitResult||e.id===o.morningSchool.id)return``;let t=o.transitResult,n=o.morningSchool;t.timeline;let r=t.breakdown;return`
@@ -365,6 +370,14 @@ import{a as e,c as t,d as n,l as r,n as i,s as a,u as o}from"./firebase-Bpv078Uo
           ${e.stationLines?`<span class="lines-info">(${e.stationLines})</span>`:``}
         </p>
         <p class="address-subtext">〒${e.postal} ${e.address}</p>
+        ${e.url?`
+          <div class="school-website-line" style="margin-top: 8px; font-size: 0.82rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span>🌐 <strong>公式サイト:</strong></span>
+            <a href="${e.url}" target="_blank" rel="noopener noreferrer" class="school-website-link" style="color: #2563eb; text-decoration: underline; word-break: break-all;">
+              ${e.url} <span style="font-size: 0.75rem; text-decoration: none;">↗</span>
+            </a>
+          </div>
+        `:``}
         <div class="bicycle-commute-line" style="margin-top: 8px; font-size: 0.82rem; display: flex; align-items: center; gap: 8px;">
           <span>🚲 <strong>自転車通学:</strong></span>
           <span class="bicycle-badge ${e.bicycleAllowed?`bicycle-ok`:`bicycle-ng`}">
