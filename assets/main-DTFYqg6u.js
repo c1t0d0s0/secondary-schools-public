@@ -413,7 +413,7 @@ import{a as e,c as t,d as n,l as r,n as i,s as a,u as o}from"./firebase-Bpv078Uo
                 ${e}
               </div>
             </div>
-          `}let i=(e.schedule||``).split(`・`).map(e=>`
+          `}let i=N(e.schedule||``).map(e=>`
           <div style="padding: 2px 0;">・${e.trim()}</div>
         `).join(``);return`
           <div class="detail-section">
