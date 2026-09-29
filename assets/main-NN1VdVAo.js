@@ -343,10 +343,16 @@ import{a as e,c as t,d as n,l as r,n as i,s as a,u as o}from"./firebase-Bpv078Uo
             <div class="exam-slots-container">
               ${c}
             </div>
-            ${e.announcementSchedule||e.procedureDeadline||e.procedureFeeInfo?`
+            ${e.capacity||e.announcementSchedule||e.procedureDeadline||e.procedureFeeInfo?`
               <div class="detail-admission-procedures">
-                <div class="proc-box-header">💰 合格発表・手続締切・延納制度</div>
+                <div class="proc-box-header">📋 募集人員・合格発表・手続締切・延納制度</div>
                 <div class="proc-grid">
+                  ${e.capacity?`
+                    <div class="proc-grid-item" style="grid-column: 1 / -1; margin-bottom: 2px;">
+                      <span class="proc-grid-label">👥 募集人数:</span>
+                      <span class="proc-grid-val" style="font-weight: 600; color: #1e293b;">${e.capacity}</span>
+                    </div>
+                  `:``}
                   <div class="proc-grid-item">
                     <span class="proc-grid-label">📢 合格発表日時:</span>
                     <span class="proc-grid-val">${e.announcementSchedule||`要確認`}</span>
@@ -935,6 +941,11 @@ import{a as e,c as t,d as n,l as r,n as i,s as a,u as o}from"./firebase-Bpv078Uo
     <div class="compare-exam-schedule">
       ${t.examScheduleRaw||`要確認`}
     </div>
+    ${t.capacity?`
+      <div class="compare-capacity" style="margin-top: 6px; font-size: 0.8rem; color: #334155; line-height: 1.4;">
+        👥 募集: <strong>${t.capacity}</strong>
+      </div>
+    `:``}
     ${e.isFeb1Pm?`
       <span class="compare-feb1-pm-pill">🏃 2/1午後入試枠あり</span>
     `:``}
