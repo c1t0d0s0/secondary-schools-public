@@ -166,16 +166,6 @@ import{a as e,c as t,d as n,l as r,n as i,s as a,u as o}from"./firebase-Bpv078Uo
         </div>
       </div>
 
-      ${e.dataQuality===`一部推定`?`
-      <div class="data-quality-warning">
-        <span class="data-quality-warning-icon">⚠️</span>
-        <div class="data-quality-warning-body">
-          <span class="data-quality-warning-title">この学校の情報には推定値が含まれています</span>
-          <span class="data-quality-warning-note">${e.dataQualityNote||`偏差値・入試日程・行事日程などの一部項目は未確認・推定に基づく情報です。最新情報は必ず学校公式サイトでご確認ください。`}</span>
-        </div>
-      </div>
-      `:``}
-
       <div class="detail-primary-choice-wrap">
         <button id="btn-toggle-bookmark-school" class="btn-bookmark-choice ${s?`is-bookmarked`:``}" type="button" data-school-id="${e.id}">
           <span>${s?`🔖 気になる登録中 (解除)`:`🔖 気になる学校に追加`}</span>
