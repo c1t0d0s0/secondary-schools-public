@@ -32,9 +32,9 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/main-DkneQP1W.js"></script>
+  <script type="module" crossorigin src="./assets/main-qLI4ZoaV.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/firebase-BilUq4xy.js">
-  <link rel="stylesheet" crossorigin href="./assets/main-CLQY9Xnh.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-5x83DYCD.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -839,6 +839,17 @@
           <option value="commute_asc">通学時間が短い順</option>
           <option value="name_asc">学校名順 (50音)</option>
         </select>
+      </div>
+      <!-- Picker Scope Switcher (All vs Bookmarked) -->
+      <div class="list-scope-switcher coapp-picker-scope" id="picker-scope-switcher">
+        <button type="button" class="btn-scope-pill active" id="btn-picker-scope-all" data-scope="all">
+          <span>📋 すべて</span>
+          <span id="picker-scope-count-all" class="scope-count-badge">0</span>
+        </button>
+        <button type="button" class="btn-scope-pill" id="btn-picker-scope-bookmarked" data-scope="bookmarked">
+          <span>🔖 気になる学校</span>
+          <span id="picker-scope-count-bookmarked" class="scope-count-badge">0</span>
+        </button>
       </div>
       <div class="coapp-picker-subtitle" id="coapp-picker-subtitle">
         <!-- e.g. 2/2 午前に入試がある学校 (34校) -->
