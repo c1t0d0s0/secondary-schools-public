@@ -32,9 +32,9 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/main-DjablHiL.js"></script>
+  <script type="module" crossorigin src="./assets/main-BTmm8wez.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/firebase-BilUq4xy.js">
-  <link rel="stylesheet" crossorigin href="./assets/main-tx1o8hAc.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-CMKHObIH.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -165,6 +165,11 @@
       <button id="btn-open-backup-modal" class="btn-header btn-header-backup" title="設定・併願プランのJSON保存と読み込み" aria-label="データ保存・読込">
         <span>💾</span>
         <span class="header-btn-text">データ保存・読込</span>
+      </button>
+
+      <button id="btn-header-help" class="btn-header btn-header-help" title="使い方・偏差値の目安・用語集" aria-label="ヘルプ">
+        <span class="header-help-icon" aria-hidden="true">？</span>
+        <span class="header-btn-text">ヘルプ</span>
       </button>
     </div>
   </header>
@@ -639,6 +644,22 @@
   </div>
 
   <!-- Basic Settings Modal (自宅設定・第一志望校・お子さまの性別) -->
+  <!-- Help Modal (使い方・偏差値の目安・用語集)。本文は src/js/help_content.js が生成する -->
+  <div id="help-modal" class="coapp-modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="help-modal-title">
+    <div class="coapp-modal-dialog help-dialog">
+      <div class="coapp-modal-header">
+        <div class="coapp-modal-title-group">
+          <span class="coapp-modal-icon">❓</span>
+          <h3 id="help-modal-title" class="coapp-modal-title">ヘルプ</h3>
+        </div>
+        <button type="button" id="btn-close-help-modal" class="btn-close-coapp-modal" aria-label="閉じる">✕</button>
+      </div>
+      <div class="help-modal-body" id="help-modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
   <div id="basic-settings-modal" class="coapp-modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="basic-settings-modal-title">
     <div class="coapp-modal-dialog basic-settings-dialog">
       <div class="coapp-modal-header">
