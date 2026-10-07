@@ -32,9 +32,9 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/main-BTmm8wez.js"></script>
+  <script type="module" crossorigin src="./assets/main-D8pPgnnY.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/firebase-BilUq4xy.js">
-  <link rel="stylesheet" crossorigin href="./assets/main-CMKHObIH.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-B3hnwTt_.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -793,6 +793,100 @@
             <small>午前校から移動できる午後校を自動判定</small>
           </span>
         </button>
+        <button type="button" id="btn-launch-recommend" class="advanced-feature-entry">
+          <span class="advanced-feature-icon">🎯</span>
+          <span class="advanced-feature-text">
+            <strong>志望校おすすめ</strong>
+            <small>偏差値・通学・特徴から第一志望／チャレンジ／安全校を提案</small>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- School Recommendation Modal (志望校おすすめ)。結果は src/js/recommend_view.js が生成する -->
+  <div id="recommend-modal" class="coapp-modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="recommend-modal-title">
+    <div class="coapp-modal-dialog recommend-dialog">
+      <div class="coapp-modal-header">
+        <div class="coapp-modal-title-group">
+          <span class="coapp-modal-icon">🎯</span>
+          <h3 id="recommend-modal-title" class="coapp-modal-title">志望校おすすめ</h3>
+        </div>
+        <button type="button" id="btn-close-recommend-modal" class="btn-close-coapp-modal" aria-label="閉じる">✕</button>
+      </div>
+      <div class="recommend-body" id="recommend-body">
+        <form class="recommend-form" id="recommend-form" onsubmit="return false;">
+          <div class="recommend-field recommend-field-score">
+            <label class="recommend-label" for="recommend-score">お子さまの偏差値</label>
+            <div class="recommend-score-row">
+              <input type="number" id="recommend-score" class="recommend-score-input" inputmode="numeric" step="1" min="30" max="75" placeholder="例: 55" aria-describedby="recommend-score-hint">
+              <div class="score-source-switcher recommend-source-switcher" role="radiogroup" aria-label="偏差値の模試">
+                <label class="score-source-option">
+                  <input type="radio" name="recommend-source" value="yotsuya" checked>
+                  <span>四谷大塚</span>
+                </label>
+                <label class="score-source-option">
+                  <input type="radio" name="recommend-source" value="shutoken">
+                  <span>首都圏模試</span>
+                </label>
+              </div>
+            </div>
+            <p class="recommend-hint" id="recommend-score-hint">受けている模試の、最近の偏差値（数回の平均）を入れてください。</p>
+          </div>
+
+          <div class="recommend-field">
+            <span class="recommend-label">通学時間の上限</span>
+            <div class="recommend-chips" id="recommend-commute-chips" role="radiogroup" aria-label="通学時間の上限">
+              <button type="button" class="recommend-chip" data-commute="30">30分</button>
+              <button type="button" class="recommend-chip" data-commute="45">45分</button>
+              <button type="button" class="recommend-chip" data-commute="60">60分</button>
+              <button type="button" class="recommend-chip" data-commute="75">75分</button>
+              <button type="button" class="recommend-chip" data-commute="90">90分</button>
+              <button type="button" class="recommend-chip" data-commute="none">上限なし</button>
+            </div>
+          </div>
+
+          <div class="recommend-field">
+            <span class="recommend-label">重視する特徴 <span class="recommend-label-sub">（複数選べます）</span></span>
+            <div class="recommend-chips" id="recommend-tag-chips">
+              <!-- Rendered dynamically from ALL_FEATURE_TAGS -->
+            </div>
+          </div>
+
+          <div class="recommend-field-pair">
+            <div class="recommend-field">
+              <span class="recommend-label">おすすめ順</span>
+              <div class="recommend-chips" id="recommend-priority-chips" role="radiogroup" aria-label="おすすめ順で重視する点">
+                <button type="button" class="recommend-chip" data-priority="commute">通学時間を重視</button>
+                <button type="button" class="recommend-chip" data-priority="balance">バランス</button>
+                <button type="button" class="recommend-chip" data-priority="feature">特徴の一致を重視</button>
+              </div>
+            </div>
+            <div class="recommend-field">
+              <span class="recommend-label">設置区分</span>
+              <div class="recommend-chips" id="recommend-est-chips">
+                <button type="button" class="recommend-chip" data-est="私立">私立</button>
+                <button type="button" class="recommend-chip" data-est="国立">国立</button>
+                <button type="button" class="recommend-chip" data-est="公立">公立</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="recommend-basic-strip">
+            <span>📍 自宅: <strong id="recommend-home-name">未設定</strong></span>
+            <span>👤 性別: <strong id="recommend-gender-name">指定なし</strong></span>
+            <button type="button" id="btn-recommend-open-settings" class="recommend-link-btn">基本設定を変更 ›</button>
+          </div>
+        </form>
+
+        <div class="recommend-summary" id="recommend-summary" aria-live="polite"></div>
+        <div class="recommend-results" id="recommend-results">
+          <!-- Rendered dynamically -->
+        </div>
+        <p class="recommend-disclaimer">
+          ※ 合格可能性は、模試の偏差値（Aライン＝合格率80%、Cライン＝合格率50%）から機械的に分けた目安で、合否を保証するものではありません。
+          公立中高一貫校は教科の試験ではなく適性検査で選抜します。通学時間と混雑は推計です。
+        </p>
       </div>
     </div>
   </div>
