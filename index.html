@@ -32,9 +32,9 @@
       gtag('config', GTM_ID);
     }
   </script>
-  <script type="module" crossorigin src="./assets/main-D8pPgnnY.js"></script>
+  <script type="module" crossorigin src="./assets/main-BMt0uaUh.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/firebase-BilUq4xy.js">
-  <link rel="stylesheet" crossorigin href="./assets/main-B3hnwTt_.css">
+  <link rel="stylesheet" crossorigin href="./assets/main-CQXiA5Y6.css">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
   <script>
@@ -270,6 +270,10 @@
                 <span>四谷大塚</span>
               </label>
               <label class="score-source-option">
+                <input type="radio" name="score-source" value="sapix">
+                <span>SAPIX</span>
+              </label>
+              <label class="score-source-option">
                 <input type="radio" name="score-source" value="shutoken">
                 <span>首都圏模試</span>
               </label>
@@ -294,10 +298,10 @@
                 <span id="score-max-badge" style="font-size: 0.8rem; font-weight: bold; min-width: 20px;">75</span>
               </div>
             </div>
-            <!-- 四谷大塚を選んでいるときだけ表示 -->
+            <!-- 四谷大塚・SAPIX (偏差値が無い学校がある模試) を選んでいるときだけ表示 -->
             <label id="score-include-noscore-row" class="score-noscore-row">
               <input type="checkbox" id="check-score-include-noscore">
-              <span>四谷大塚の偏差値が無い学校も表示 <span id="score-noscore-count" class="score-noscore-count"></span></span>
+              <span><span id="score-noscore-source">四谷大塚</span>の偏差値が無い学校も表示 <span id="score-noscore-count" class="score-noscore-count"></span></span>
             </label>
             <p id="score-source-note" class="score-source-note">
               合不合判定テストの一覧表の値です（最初の一般入試の回）。共学校は基本設定の性別の値を使います。
@@ -824,6 +828,10 @@
                 <label class="score-source-option">
                   <input type="radio" name="recommend-source" value="yotsuya" checked>
                   <span>四谷大塚</span>
+                </label>
+                <label class="score-source-option">
+                  <input type="radio" name="recommend-source" value="sapix">
+                  <span>SAPIX</span>
                 </label>
                 <label class="score-source-option">
                   <input type="radio" name="recommend-source" value="shutoken">
