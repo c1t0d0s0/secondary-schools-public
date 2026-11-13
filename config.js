@@ -1,4 +1,4 @@
-const GTM_ID = 'G-GESQ9QJZRE';
+const GTM_ID = 'GTM-TS7PVPZ9';
 
 const FIREBASE_CONFIG = {
   "apiKey": "AIzaSyCpRm1AUvtQIYsAtvnqLEjnok27Oxvakoo",

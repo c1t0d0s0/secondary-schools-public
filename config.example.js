@@ -1,4 +1,5 @@
-// Google Tag Manager ID (オプション)
+// Google Analytics 測定ID (G-XXXXXXXXXX) または Google Tag Manager のコンテナID (GTM-XXXXXXX)。オプション
+// GTM- で始まる場合は Google Tag Manager、それ以外は Google Analytics (gtag.js) のタグを読み込む
 const GTM_ID = '';
 
 // Firebase Authentication & Firestore Configuration

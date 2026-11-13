@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TS7PVPZ9');</script>
+  <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>1都3県の中高一貫校マップ & 通学ラッシュ分析</title>
@@ -21,30 +28,33 @@
     if (typeof FIREBASE_CONFIG !== 'undefined' && typeof window !== 'undefined') {
       window.FIREBASE_CONFIG = FIREBASE_CONFIG;
     }
-    if (typeof GTM_ID !== 'undefined' && GTM_ID && !window.dataLayer) {
+    // config.js の GTM_ID からタグを読み込む (デプロイ時にタグを埋め込んだ場合は dataLayer が既にあるので何もしない)。
+    // GTM- で始まる ID は Google Tag Manager、それ以外 (G-XXXX など) は Google Analytics の gtag.js
+    if (typeof GTM_ID !== 'undefined' && /^[A-Za-z0-9-]+$/.test(GTM_ID) && !window.dataLayer) {
+      window.dataLayer = [];
       const s = document.createElement('script');
       s.async = true;
-      s.src = `https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`;
+      if (/^GTM-/i.test(GTM_ID)) {
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        s.src = `https://www.googletagmanager.com/gtm.js?id=${GTM_ID}`;
+      } else {
+        s.src = `https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`;
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', GTM_ID);
+      }
       document.head.appendChild(s);
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', GTM_ID);
     }
   </script>
   <script type="module" crossorigin src="./assets/main-DA4nUwqR.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/firebase-vaab25MG.js">
   <link rel="stylesheet" crossorigin href="./assets/main-CQXiA5Y6.css">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GESQ9QJZRE"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-GESQ9QJZRE');
-  </script>
 </head>
 <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS7PVPZ9"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   <!-- Authentication Modal (Google Sign-In + Whitelist & Password Fallback) -->
   <div id="auth-modal" class="auth-overlay">
     <div class="auth-card">
